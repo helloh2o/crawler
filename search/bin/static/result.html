@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{.title}}</title>
+    <style>
+        body {
+            padding-left: 20%;
+        }
+        .s_btn { float: left; width: 100px; height: 33px; background: url(/icon_index.png) no-repeat 0 0; background-image: -webkit-image-set(url(/icon_index.png) 2x,url(/icon_index.png) 1x);border: 0 none; text-indent: -99em; margin-left: -1px; overflow: hidden; cursor: pointer }
+        .s_input { float: left; width: 469px; height: 20px; border: 1px solid #b8c3c9; border-top-left-radius: 2px; border-bottom-left-radius: 2px; font: 16px/18px tahoma, arial, sans-serif; outline: 0 none; padding: 5px 5px 6px; }
+    </style>
+</head>
+<body>
+<h1>
+    <img src="/logo_index_soso.png" srcset="/logo_index_sosox2.png" width="280" height="49" alt="搜搜" title="搜搜">
+</h1>
+<div id="sc">
+    <div id="s">
+        <form action="/search/?" id="sf" name="sf">
+            <input type="hidden" value="utf8" name="ie"/>
+            <input type="hidden" value="s.idx" id="pid" name="pid"/>
+            <input type="text" value="" id="query" autocomplete="off" smartch="sb.c.idx" smartpid="sb.idx" name="query"
+                   class="s_input" onMouseOver="this.className='s_input s_input_h'"
+                   onMouseOut="this.className='s_input'"/>
+            <input type="submit" id="stb" value="搜搜" class="s_btn" onMouseOver="this.className='s_btn s_btn_h'"
+                   onMouseDown="this.className='s_btn s_btn_d'" onMouseOut="this.className='s_btn'"/>
+        </form>
+    </div>
+</div>
+<br>
+<p><span style="color: red">{{.tips}}</span>为您找到 {{.hits}} 个匹配结果</p>
+{{range .data}}
+    <div class="item">
+        <a href="{{.URL}}"  target="_blank"><h3 class="name" style="max-width: 50%;">{{.Title}}</h3></a>
+        <p style="max-width: 50%;">{{.Description}}</p>
+    </div>
+{{end}}
+<br><br>
+<h3><a id="pre" href="#">上一页</a> &nbsp&nbsp  | &nbsp&nbsp <a id="next" href="#">下一页</a></h3>
+<script>
+    function getQuery() {
+        const url = decodeURI(location.search); // 获取url中"?"符后的字串(包括问号)
+        let query = {};
+        if (url.indexOf("?") != -1) {
+            const str = url.substr(1);
+            const pairs = str.split("&");
+            for(let i = 0; i < pairs.length; i ++) {
+                const pair = pairs[i].split("=");
+                query[pair[0]] = pair[1];
+            }
+        }
+        return query ;  // 返回对象
+    }
+    window.onload =  function (){
+        let q = getQuery();
+        let preA = document.getElementById("pre");
+        let nextA = document.getElementById("next");
+        if(q["pn"] > 1){
+            let curr = parseInt(q.pn)
+            preA.href = "http://" + location.host + "/search?query=" + q.query + "&pn=" + (curr - 1);
+            nextA.href = "http://" + location.host + "/search?query=" + q.query + "&pn=" + (curr + 1);
+        }else {
+            nextA.href = "http://" + location.host + "/search?query=" + q.query + "&pn=2";
+        }
+    }
+</script>
+</body>
+</html>

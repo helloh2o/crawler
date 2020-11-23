@@ -1,0 +1,6 @@
+addr: ":9090"
+es_node: "http://127.0.0.1:9200"
+index_query: # elastic index && query filed
+  pages: ["title"] # 关键字匹配字段，数组字段依次匹配，配在约前面优先级越高，获得匹配数据返回
+  index_topic: ["title"]
+  index_user: ["tags"]

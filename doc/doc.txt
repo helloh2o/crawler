@@ -1,0 +1,329 @@
+1.docker pull elasticsearch:7.9.3
+2.docker run --name elasticsearch -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" elasticsearch:7.9.3
+// 常用搜索 https://www.jianshu.com/p/5ef2312bf12b
+PUT /index
+{
+    "settings" : {
+        "index" : {
+            "analysis.analyzer.default.type": "ik_max_word",
+            "number_of_shards" : 5,
+            "number_of_replicas" : 1
+        }
+    }
+}
+
+GET /_search    //所有索引，所有type下的所有数据都搜索出来
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /test_index/_search    //指定一个index，搜索其下所有type的数据
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /test_index,test_index2/_search    //同时搜索两个index下的数据
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /*1,*2/_search    //按照通配符去匹配多个索引
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /test_index/test_type/_search    //搜索一个index下指定的type的数据
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /test_index/test_type,test_type2/_search    //可以搜索一个index下多个type的数据
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /test_index,test_index2/test_type,test_type2/_search    //搜索多个index下的多个type的数据
+{
+  "query": {
+    "match_all": {}
+  }
+}
+GET /_all/test_type,test_type2/_search    //可以代表搜索所有index下的指定type的数据
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+// match
+GET /_search
+{
+  "query": {
+    "match": {
+      "title": "elasticsearch"
+    }
+  }
+}
+// multi_match
+GET /_search
+{
+  "query": {
+    "multi_match": {
+      "query": "elasticsearch",
+      "fields": ["title","content"]
+    }
+  }
+}
+// query
+GET /company/employee/_search
+{
+  "query": {
+    "range": {
+      "age": {
+        "gte": 30
+      }
+    }
+  }
+}
+//term query
+//term 查询被用于精确值 匹配，这些精确值可能是数字、时间、布尔或者那些 not_analyzed 的字符串
+//term 查询对于输入的文本不 分析 ，所以它将给定的值进行精确查询
+GET /_search
+{
+  "query": {
+    "term": {
+      "title":"test hello"
+    }
+  }
+}
+//terms query
+//terms 查询和 term 查询一样，但它允许你指定多值进行匹配。
+//如果这个字段包含了指定值中的任何一个值，那么这个文档满足条件：
+{ "terms": { "tag": [ "search", "full_text", "nosql" ] }}
+//定制排序
+//查询的默认情况是按照_score排序的，然而某些情况下，可能没有有用的_score，比如说filter或constant_score
+GET _search
+{
+  "query": {
+    "bool": {
+      "filter": {
+        "term": {
+          "author_id": 110
+        }
+      }
+    }
+  }
+}
+GET _search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "term": {
+          "author_id": 110
+        }
+      }
+    }
+  }
+}
+//定制排序规则
+GET /company/employee/_search
+{
+  "query": {
+    "constant_score": {
+      "filter": {
+        "range":{
+          "age":{
+            "gte":30
+          }
+        }
+      }
+    }
+  },
+  "sort": [
+    {
+      "join_date": {
+        "order": "asc"
+      }
+    }
+  ]
+}
+// 删除数据 https://blog.csdn.net/laoyang360/article/details/80038930
+探究 | Elasticsearch如何物理删除给定期限的历史数据？
+
+铭毅天下 2018-04-22 14:49:34  11111  收藏 9
+分类专栏： 深入详解Elasticsearch
+版权
+1、题记
+想到删除，基础认知是delete，细分为删除文档（document）和删除索引；要删除历史数据，基础认知是：删除了给定条件的数据，用delete_by_query。
+实际操作发现：
+- 删除文档后，磁盘空间并没有立即减少，反而增加了？
+- 除了定时任务+delete_by_query，有没有更好的方式呢？
+
+2、常见的删除操作
+2.1 删除单个文档
+DELETE /twitter/_doc/1
+1
+2.2 删除满足给定条件的文档
+POST twitter/_delete_by_query
+{
+  "query": {
+    "match": {
+      "message": "some message"
+    }
+  }
+}
+注意：执行批量删除的时候，可能会发生版本冲突。强制执行删除的方式如下：
+
+POST twitter/_doc/_delete_by_query?conflicts=proceed
+{
+  "query": {
+    "match_all": {}
+  }
+}
+2.3 删除单个索引
+DELETE /twitter
+1
+2.4 删除所有索引
+DELETE /_all
+1
+或者
+
+DELETE /*
+1
+删除所有索引是非常危险的操作，要注意谨慎操作。
+
+3、删除文档后台做了什么？
+执行删除后的返回结果：
+
+{
+  "_index": "test_index",
+  "_type": "test_type",
+  "_id": "22",
+  "_version": 2,
+  "result": "deleted",
+  "_shards": {
+    "total": 2,
+    "successful": 1,
+    "failed": 0
+  },
+  "_seq_no": 2,
+  "_primary_term": 17
+}
+解读：
+
+索引的每个文档都是版本化的。
+删除文档时，可以指定版本以确保我们试图删除的相关文档实际上被删除，并且在此期间没有更改。
+
+每个在文档上执行的写操作，包括删除，都会使其版本增加。
+
+真正的删除时机：
+
+deleting a document doesn’t immediately remove the document from disk; it just marks it as deleted. Elasticsearch will clean up deleted documents in the background as you continue to index more data.
+
+4、删除索引和删除文档的区别？
+1）删除索引是会立即释放空间的，不存在所谓的“标记”逻辑。
+
+2）删除文档的时候，是将新文档写入，同时将旧文档标记为已删除。 磁盘空间是否释放取决于新旧文档是否在同一个segment file里面，因此ES后台的segment merge在合并segment file的过程中有可能触发旧文档的物理删除。
+
+但因为一个shard可能会有上百个segment file，还是有很大几率新旧文档存在于不同的segment里而无法物理删除。想要手动释放空间，只能是定期做一下force merge，并且将max_num_segments设置为1。
+
+POST /_forcemerge
+1
+5、如何仅保存最近100天的数据？
+有了上面的认知，仅保存近100天的数据任务分解为：
+- 1）delete_by_query设置检索近100天数据；
+- 2）执行forcemerge操作，手动释放磁盘空间。
+
+删除脚本如下：
+
+#!/bin/sh
+curl -H'Content-Type:application/json' -d'{
+    "query": {
+        "range": {
+            "pt": {
+                "lt": "now-100d",
+                "format": "epoch_millis"
+            }
+        }
+    }
+}
+' -XPOST "http://192.168.1.101:9200/logstash_*/
+_delete_by_query?conflicts=proceed"
+merge脚本如下：
+
+#!/bin/sh
+curl -XPOST 'http://192.168.1.101:9200/_forcemerge?
+only_expunge_deletes=true&max_num_segments=1'
+1
+2
+3
+6、有没有更通用的方法？
+有，使用ES官网工具——curator工具。
+
+6.1 curator简介
+主要目的：规划和管理ES的索引。支持常见操作：创建、删除、合并、reindex、快照等操作。
+
+6.2 curator官网地址
+http://t.cn/RuwN0oM
+
+Git地址：https://github.com/elastic/curator
+
+6.3 curator安装向导
+地址：http://t.cn/RuwCkBD
+
+注意：
+curator各种博客教程层出不穷，但curator旧版本和新版本有较大差异，建议参考官网最新手册部署。
+旧版本命令行方式新版本已不支持。
+
+6.4 curator命令行操作
+$ curator --help
+Usage: curator [OPTIONS] ACTION_FILE
+
+  Curator for Elasticsearch indices.
+
+  See http://elastic.co/guide/en/elasticsearch/client/curator/current
+
+Options:
+  --config PATH  Path to configuration file. Default: ~/.curator/curator.yml
+  --dry-run      Do not perform any changes.
+  --version      Show the version and exit.
+  --help         Show this message and exit.
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+核心：
+- 配置文件config.yml：配置要连接的ES地址、日志配置、日志级别等；
+
+执行文件action.yml: 配置要执行的操作(可批量）、配置索引的格式（前缀匹配、正则匹配方式等）
+6.5 curator适用场景
+最重要的是：
+
+仅以删除操作为例：curator可以非常简单地删除x天后的索引的前提是：索引命名要遵循特定的命名模式——如:以天为命名的索引：logstash_2018.04.05。
+
+命名模式需要和action.yml中的delete_indices下的timestring对应。
+
+7、小结
+多参考官网最新的文档，历史版本的历史文档很容易误导人；
+多真正去实践，而不是仅限于知道；
+medcl：ES新版本6.3 有一个 Index LifeCycle Management 可以很方便的管理索引的保存期限。
+参考：
+
+[1]http://t.cn/RuwOTv
+[2]http://t.cn/RuwXHBr
+[3]http://t.cn/RuwOofC

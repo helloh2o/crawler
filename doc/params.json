@@ -1,0 +1,38 @@
+[
+  {
+  "from" : 10, "size" : 20,
+  "query": {
+    "multi_match": {
+      "query": "java",
+      "type": "best_fields", //最佳匹配
+      "fields": ["title","description","key_words"]
+    }
+  },
+  "sort": [
+    {
+      "_id": {
+        "order": "asc"
+      }
+    }
+  ]
+},
+
+{
+  "from" : 0, "size" : 20,
+  "query": {
+    "match_phrase": {
+      "title": {
+        "query": "语言排行",
+        "slop":  1
+      }
+    }
+  },
+  "sort": [
+    {
+      "weight": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+  ]
