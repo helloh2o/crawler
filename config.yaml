@@ -6,7 +6,7 @@ ShowSQL: false
 # ElasticSearch Data Node
 ESNode: http://localhost:9200
 # ES索引，类似mysql db_name
-EsIndex: pages
+EsIndex: goodgirl_topic_1
 CrawlParma:
   # 任务队列最大等待值 默认10万 200MB（超过该值新任务取消）, 内存保护，建议不要超过100万
   MaxWaitQueueSize: 100000
@@ -19,24 +19,10 @@ Sites:
   - seed: "https://blog.csdn.net/"
     # 需要抓取的路径
     paths: [ "*/article/details" ]
-    # 搜索权重
-    weight: 10
-    # 过期天数
-    days: 1
     # 页面解析器
-    parser: "default"
+    parser: "csdn"
 
-  - seed: "https://www.jianshu.com/"
-    paths: [ "/p/*" ]
-    weight: 8
-    days: 10
-  - seed: "https://tieba.baidu.com/"
-    paths: [ ]
-    weight: 8
-    days: 10
-  - seed: "https://www.lagou.com/"
-    paths: [ ]
-    weight: 8
-    days: 10
+  #- seed: "https://www.jianshu.com/"
+    #paths: [ "/p/*" ]
 
 

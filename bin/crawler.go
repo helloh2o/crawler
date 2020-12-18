@@ -4,6 +4,7 @@ import (
 	"CrawlerX/config"
 	"CrawlerX/core"
 	"CrawlerX/db"
+	"CrawlerX/mod"
 	"CrawlerX/out"
 	"CrawlerX/parser"
 	"log"
@@ -11,11 +12,11 @@ import (
 
 func main() {
 	config.Init("./config.yaml")
-	/*if err := db.OpenMySql(config.Instance.MySqlUrl, config.Instance.MySqlMaxIdle, config.Instance.MySqlMaxOpen, config.Instance.ShowSQL, &mod.PageInfo{}); err != nil {
+	if err := db.OpenMySql(config.Instance.MySqlUrl, config.Instance.MySqlMaxIdle, config.Instance.MySqlMaxOpen, config.Instance.ShowSQL, &mod.PageInfo{}); err != nil {
 		log.Println(err)
 	} else {
 		db.MysqlReady = true
-	}*/
+	}
 	if err := db.InitESClient(config.Instance.ESNode, false); err != nil { //docker
 		log.Printf("InitESClient client error %v", err)
 	} else {

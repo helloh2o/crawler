@@ -20,7 +20,7 @@ func main() {
 	if *from == "" || *to == "" {
 		panic("Please write the correct from index and to index.")
 	}
-	if err := db.InitESClient("http://127.0.0.1:9200", false, ""); err != nil { //docker
+	if err := db.InitESClient("http://127.0.0.1:9200", false); err != nil { //docker
 		panic(err)
 	}
 	search.Scroll(*from, elastic.NewMatchAllQuery(), 500, 65535, func(current []*elastic.SearchHit) {

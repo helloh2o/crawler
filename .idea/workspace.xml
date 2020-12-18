@@ -1,33 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="BranchesTreeState">
-    <expand>
+    <expand />
+    <select>
       <path>
         <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-    </expand>
-    <select />
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b76a80f-a5b7-426d-b342-84c48af087cb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tool/protect/fd.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tool/protect/fd_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/sync/river.toml" beforeDir="false" afterPath="$PROJECT_DIR$/tool/sync/river.toml" afterDir="false" />
+    <list default="true" id="1b76a80f-a5b7-426d-b342-84c48af087cb" name="Default Changelist" comment="1. fix">
+      <change afterPath="$PROJECT_DIR$/mod/topic.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parser/csdn.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/crawler.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/crawler.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/engine_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/engine_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/common.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tool/cp/cp_index_.go" beforeDir="false" afterPath="$PROJECT_DIR$/tool/cp/cp_index_.go" afterDir="false" />
     </list>
-    <option name="SHOW_DIALOG" value="false" />
+    <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
-    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="true" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -56,23 +53,24 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
-    <property name="settings.editor.selected.configurable" value="go.vgo" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/parser" />
+    <property name="settings.editor.selected.configurable" value="Shelf.Project.Settings" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\ayoo\go\src\crawler\search\inner" />
-      <recent name="C:\Users\ayoo\go\src\crawler\doc" />
-      <recent name="C:\Users\ayoo\go\src\crawler\bin" />
-      <recent name="C:\Users\ayoo\go\src\crawler" />
-      <recent name="C:\Users\ayoo\go\src\crawler\search\bin\static" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ayoo\go\src\crawler\search" />
       <recent name="C:\Users\ayoo\go\src\crawler\tool\cp" />
       <recent name="C:\Users\ayoo\go\src\crawler\doc" />
       <recent name="C:\Users\ayoo\go\src\crawler\search\bin" />
       <recent name="C:\Users\ayoo\go\src\crawler\search\static" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\crawler\parser" />
+      <recent name="C:\Users\ayoo\go\src\crawler\search\inner" />
+      <recent name="C:\Users\ayoo\go\src\crawler\doc" />
+      <recent name="C:\Users\ayoo\go\src\crawler\bin" />
+      <recent name="C:\Users\ayoo\go\src\crawler" />
     </key>
   </component>
   <component name="RunManager" selected="Go Test.fd_test.go">
@@ -146,6 +144,9 @@
     </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SshConsoleOptionsProvider">
+    <option name="myEncoding" value="UTF-8" />
+  </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
@@ -154,7 +155,13 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="CUSTOM_BOOLEAN_PROPERTIES">
+                <map>
+                  <entry key="Show.Git.Branches" value="true" />
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -162,7 +169,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. 搜索简单界面处理" />
     <MESSAGE value="1. 1000 条 flush" />
     <MESSAGE value="1. bug for id on es" />
     <MESSAGE value="1. testing" />
@@ -187,10 +193,16 @@
     <MESSAGE value="1. default index" />
     <MESSAGE value="1. config files" />
     <MESSAGE value="1. parsers" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. parsers" />
+    <MESSAGE value="1. fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. fix" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+    <environment>
+      <map>
+        <entry key="GOPROXY" value="https://goproxy.cn" />
+      </map>
+    </environment>
   </component>
   <component name="WindowStateProjectService">
     <state x="752" y="353" key="#Go_Modules" timestamp="1604314414692">
@@ -209,14 +221,18 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="696" y="316" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604888066330" />
-    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2" timestamp="1605062301788">
+    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2" timestamp="1607064042101">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1605062301788" />
-    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1604643933400">
+    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607064042101" />
+    <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607068941224">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1604643933400" />
+    <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607068941224" />
+    <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1608111975753">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608111975753" />
     <state width="1877" height="313" key="GridCell.Tab.0.bottom" timestamp="1605148672175">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -253,10 +269,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="783" y="138" key="RollbackChangesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1604901925341" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1604367011746">
+    <state x="461" y="164" key="SettingsEditor" timestamp="1607063721630">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1604367011746" />
+    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607063721630" />
     <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1605062303454">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -265,6 +281,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="594" y="189" width="594" height="650" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1604915518578" />
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1607063571963">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607063571963" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

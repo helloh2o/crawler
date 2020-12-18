@@ -22,7 +22,7 @@ func SetSitesMap(sm map[string]mod.Site) {
 }
 
 // 基础解析器
-func (ps *PageBasicParser) Parse(base *url.URL, reader io.Reader, seedFuc func(string)) duck.Result {
+func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, seedFuc func(string)) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -57,7 +57,7 @@ func (ps *PageBasicParser) Parse(base *url.URL, reader io.Reader, seedFuc func(s
 			}
 		}
 	})
-	return getResult(doc, base).Value()
+	return cmm.getResult(doc, base).Value()
 }
 
 func isNext(info *url.URL) bool {
@@ -95,7 +95,7 @@ func isNext(info *url.URL) bool {
 	return false
 }
 
-func getResult(doc *goquery.Document, base *url.URL) duck.Result {
+func (cmm *PageBasicParser) getResult(doc *goquery.Document, base *url.URL) duck.Result {
 	result := &mod.PageInfo{}
 	// title
 	title := doc.Find("title").Text()

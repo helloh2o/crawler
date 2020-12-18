@@ -58,8 +58,8 @@ func registerParseByName(site mod.Site) {
 	switch site.ParserName {
 	case "":
 		Instance.Parsers[""] = new(parser.PageBasicParser)
-	case "default":
-		Instance.Parsers["default"] = new(parser.PageBasicParser)
+	case "csdn":
+		Instance.Parsers["csdn"] = new(parser.Csdn)
 	default:
 		Instance.Parsers["default"] = new(parser.PageBasicParser)
 	}
