@@ -10,10 +10,6 @@ EsIndex: goodgirl_topic_1
 CrawlParma:
   # 任务队列最大等待值 默认10万 200MB（超过该值新任务取消）, 内存保护，建议不要超过100万
   MaxWaitQueueSize: 100000
-  # 抓取“工人” 个数, 建议不要超过10个, 太快了可能触发爬取对象网站的保护策略
-  MaxWorkers: 10
-  # 抓取频率，“工人抓取” 间隔毫秒 ms, 最小50ms, 太小了可能触发爬取对象网站的保护策略, 还可能无法正常建立连接
-  WorkerRate: 100
 # 抓取站点配置{seed: 种子页面地址, weight: 搜索权重}
 Sites:
   - seed: "https://blog.csdn.net/"
@@ -21,7 +17,10 @@ Sites:
     paths: [ "*/article/details" ]
     # 页面解析器
     parser: "csdn"
-
+    # 抓取“工人” 个数, 建议单机不要超过5个, 太快了可能触发爬取对象网站的保护策略
+    worker_size: 4
+    # 抓取频率，“工人抓取” 间隔毫秒 ms, 最小50ms, 太小了可能触发爬取对象网站的保护策略, 还可能无法正常建立连接
+    worker_rate: 100
   #- seed: "https://www.jianshu.com/"
     #paths: [ "/p/*" ]
 

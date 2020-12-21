@@ -27,14 +27,8 @@ func main() {
 	}
 	// 获取结果
 	out.Save(core.SubResult())
-	// 设置参数
-	params := config.Instance.CrawlParma
-	core.InitEngine(params.MaxWaitQueueSize, params.MaxWorkers, params.WorkerRate, config.Instance.Parsers)()
+	core.InitEngine(config.Instance.Sites, config.Instance.Parsers)()
 	// 为解析器设置站点
 	parser.SetSitesMap(config.Instance.SiteMap)
-	// 抓取指定网站列表
-	for _, site := range config.Instance.Sites {
-		core.PushSeed(site.Seed)
-	}
 	select {}
 }

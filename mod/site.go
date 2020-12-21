@@ -11,4 +11,8 @@ type Site struct {
 	ExpirationDays int `yaml:"days"`
 	// 解析器
 	ParserName string `yaml:"parser"`
+	// 工人数量
+	WorkerSize int `yaml:"worker_size"`
+	// 工人频率
+	WorkerRate int `yaml:"worker_rate"`
 }

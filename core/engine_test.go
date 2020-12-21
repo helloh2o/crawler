@@ -2,6 +2,7 @@ package core
 
 import (
 	"CrawlerX/duck"
+	"CrawlerX/mod"
 	"CrawlerX/parser"
 	"testing"
 )
@@ -15,7 +16,14 @@ func TestPushSeed(t *testing.T) {
 			<-out
 		}
 	}()
-	InitEngine(1000, 2, 200, ps)()
-	PushSeed("https://mlog.club/")
+	InitEngine([]mod.Site{mod.Site{
+		Seed:           "",
+		Weight:         0,
+		Paths:          nil,
+		ExpirationDays: 0,
+		ParserName:     "",
+		WorkerSize:     0,
+		WorkerRate:     0,
+	}}, ps)()
 	select {}
 }

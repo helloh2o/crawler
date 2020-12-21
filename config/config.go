@@ -11,11 +11,10 @@ import (
 )
 
 type Config struct {
-	MySqlUrl     string     `yaml:"MySqlUrl"`
-	MySqlMaxIdle int        `yaml:"MySqlMaxIdle"`
-	MySqlMaxOpen int        `yaml:"MySqlMaxOpen"`
-	ShowSQL      bool       `yaml:"ShowSQL"`
-	CrawlParma   crawlParma `yaml:"CrawlParma"`
+	MySqlUrl     string `yaml:"MySqlUrl"`
+	MySqlMaxIdle int    `yaml:"MySqlMaxIdle"`
+	MySqlMaxOpen int    `yaml:"MySqlMaxOpen"`
+	ShowSQL      bool   `yaml:"ShowSQL"`
 	// ES node
 	ESNode  string `yaml:"ESNode"`
 	EsIndex string `yaml:"EsIndex"`

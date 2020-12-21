@@ -10,17 +10,15 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b76a80f-a5b7-426d-b342-84c48af087cb" name="Default Changelist" comment="1. fix">
-      <change afterPath="$PROJECT_DIR$/mod/topic.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/parser/csdn.go" afterDir="false" />
+    <list default="true" id="1b76a80f-a5b7-426d-b342-84c48af087cb" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/crawler.go" beforeDir="false" afterPath="$PROJECT_DIR$/bin/crawler.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/engine.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/engine.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/engine_test.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/engine_test.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/parser/common.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/common.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tool/cp/cp_index_.go" beforeDir="false" afterPath="$PROJECT_DIR$/tool/cp/cp_index_.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/worker.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/worker.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mod/site.go" beforeDir="false" afterPath="$PROJECT_DIR$/mod/site.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="true" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +37,7 @@
   <component name="GOROOT" path="C:\Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="SET_USER_NAME_GLOBALLY" value="false" />
   </component>
   <component name="ProjectId" id="1jjP3uQqHpsXDCoyfvYl2n62tID" />
   <component name="ProjectViewState">
@@ -169,7 +168,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. 1000 条 flush" />
     <MESSAGE value="1. bug for id on es" />
     <MESSAGE value="1. testing" />
     <MESSAGE value="1. pre &amp; next page" />
@@ -194,7 +192,8 @@
     <MESSAGE value="1. config files" />
     <MESSAGE value="1. parsers" />
     <MESSAGE value="1. fix" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. fix" />
+    <MESSAGE value="1. csdn" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. csdn" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -221,9 +220,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="696" y="316" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1604888066330" />
-    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2" timestamp="1607064042101">
+    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2" timestamp="1608281699090">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="900" y="209" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608281699090" />
     <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607064042101" />
     <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607068941224">
       <screen x="0" y="0" width="1920" height="1040" />
@@ -273,9 +273,10 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607063721630" />
-    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1605062303454">
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2" timestamp="1608281700728">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
+    <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608281700728" />
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1605062303454" />
     <state x="594" y="189" width="594" height="650" key="find.popup" timestamp="1604915518578">
       <screen x="0" y="0" width="1920" height="1040" />
