@@ -13,13 +13,7 @@ import (
 	"time"
 )
 
-var sites map[string]mod.Site
-
 type PageBasicParser func()
-
-func SetSitesMap(sm map[string]mod.Site) {
-	sites = sm
-}
 
 // 基础解析器
 func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
@@ -126,12 +120,5 @@ func (cmm *PageBasicParser) getResult(doc *goquery.Document, base *url.URL) duck
 	result.Description = description
 	result.URL = base.String()
 	result.CreateAt = time.Now().Unix()
-	site, ok := sites[result.Domain]
-	if ok {
-		result.Weight = site.Weight
-	}
-	if site.ExpirationDays > 0 {
-		result.Expiration = time.Now().Unix() + (60 * 60 * 24 * int64(site.ExpirationDays))
-	}
 	return result
 }

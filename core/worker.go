@@ -21,7 +21,7 @@ type worker struct {
 }
 
 func runWorkerGroup(id int, site *mod.Site, output chan duck.Result) {
-	input := make(chan string)
+	input := make(chan string, 10000*site.WorkerSize)
 	req := NewReq("")
 	for i := 0; i < site.WorkerSize; i++ {
 		w := &worker{id: id}
@@ -45,20 +45,14 @@ func (w *worker) Consume() {
 			<-w.rate.C
 			// 请求
 			go w.req.Crawl(target, func(req *url.URL, reader io.Reader) {
-				var newTasks []string
-				defer func() {
-					// newTasks
-					go func(tasks []string) {
-						for _, v := range tasks {
-							w.in <- v
-						}
-					}(newTasks)
-				}()
 				result := w.site.Parser.Parse(req, reader, w.site.Paths, func(task string) {
 					if _, ok := w.history.Load(task); ok {
 						return
 					}
-					newTasks = append(newTasks, task)
+					select {
+					case w.in <- task:
+					default:
+					}
 				})
 				if result != nil {
 					output <- result
