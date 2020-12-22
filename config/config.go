@@ -19,14 +19,9 @@ type Config struct {
 	ESNode  string `yaml:"ESNode"`
 	EsIndex string `yaml:"EsIndex"`
 	// 抓取列表
-	Sites   []mod.Site             `yaml:"Sites"`
+	Sites   []*mod.Site            `yaml:"Sites"`
 	SiteMap map[string]mod.Site    `yaml:"-"`
 	Parsers map[string]duck.Parser `yaml:"-"`
-}
-type crawlParma struct {
-	MaxWaitQueueSize int `yaml:"MaxWaitQueueSize"`
-	MaxWorkers       int `yaml:"MaxWorkers"`
-	WorkerRate       int `yaml:"WorkerRate"`
 }
 
 var (
@@ -47,19 +42,16 @@ func Init(filename string) {
 		if err != nil || info.Host == "" {
 			log.Fatalf("站点种子配置错误 %v", err)
 		}
-		Instance.SiteMap[info.Host] = site
 		registerParseByName(site)
 	}
 }
 
 // 注册配置解析器
-func registerParseByName(site mod.Site) {
+func registerParseByName(site *mod.Site) {
 	switch site.ParserName {
-	case "":
-		Instance.Parsers[""] = new(parser.PageBasicParser)
 	case "csdn":
-		Instance.Parsers["csdn"] = new(parser.Csdn)
+		site.Parser = new(parser.Csdn)
 	default:
-		Instance.Parsers["default"] = new(parser.PageBasicParser)
+		site.Parser = new(parser.PageBasicParser)
 	}
 }

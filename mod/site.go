@@ -1,5 +1,7 @@
 package mod
 
+import "CrawlerX/duck"
+
 type Site struct {
 	// 种子页面
 	Seed string `yaml:"seed"`
@@ -15,4 +17,6 @@ type Site struct {
 	WorkerSize int `yaml:"worker_size"`
 	// 工人频率
 	WorkerRate int `yaml:"worker_rate"`
+	// 解析器
+	Parser duck.Parser
 }

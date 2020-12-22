@@ -22,7 +22,7 @@ func SetSitesMap(sm map[string]mod.Site) {
 }
 
 // 基础解析器
-func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, seedFuc func(string)) duck.Result {
+func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -49,7 +49,7 @@ func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, seedFuc func(
 						//name := strings.Trim(selection.Text(), "")
 						seed := info.String()
 						//log.Printf("find new seed name:%s url:%s", name, seed)
-						if isNext(info) {
+						if isNext(info, paths) {
 							seedFuc(seed)
 						}
 					}
@@ -60,12 +60,11 @@ func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, seedFuc func(
 	return cmm.getResult(doc, base).Value()
 }
 
-func isNext(info *url.URL) bool {
-	site := sites[info.Host]
-	if len(site.Paths) == 0 {
+func isNext(info *url.URL, paths []string) bool {
+	if len(paths) == 0 {
 		return true
 	} else {
-		for _, rule := range site.Paths {
+		for _, rule := range paths {
 			ruleSlice := strings.Split(rule, "/")
 			regex := "^"
 			if len(ruleSlice) > 0 && ruleSlice[0] == "*" {

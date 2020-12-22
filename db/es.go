@@ -31,6 +31,9 @@ func InitESClient(url string, sniff bool) (err error) {
 }
 
 func SavePage(index string, data interface{}) (err error) {
+	if EsClient == nil {
+		return
+	}
 	ctx := context.Background()
 	p, ok := data.(*mod.PageInfo)
 	if ok {
@@ -42,12 +45,18 @@ func SavePage(index string, data interface{}) (err error) {
 }
 
 func DeleteIndex(index string) {
+	if EsClient == nil {
+		return
+	}
 	ctx := context.Background()
 	if _, err := EsClient.DeleteIndex(index).Do(ctx); err != nil {
 		log.Printf("Delete index %s failed.", index)
 	}
 }
 func CreateIndex(indexName string) error {
+	if EsClient == nil {
+		return errors.New("es not open")
+	}
 	ctx := context.Background()
 	exists, err := EsClient.IndexExists(indexName).Do(ctx)
 	if err != nil {

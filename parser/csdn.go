@@ -14,7 +14,7 @@ import (
 type Csdn func()
 
 // 基础解析器
-func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, seedFuc func(string)) duck.Result {
+func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -41,7 +41,7 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, seedFuc func(string)) d
 						//name := strings.Trim(selection.Text(), "")
 						seed := info.String()
 						//log.Printf("find new seed name:%s url:%s", name, seed)
-						if isNext(info) {
+						if isNext(info, paths) {
 							seedFuc(seed)
 						}
 					}
@@ -67,6 +67,8 @@ func (csdn *Csdn) getResult(doc *goquery.Document, base *url.URL) duck.Result {
 			}
 		}
 	})
+	_ = description
+	_ = keywords
 	doc.Find("link").Each(func(i int, selection *goquery.Selection) {
 		rel, ok := selection.Attr("rel")
 		if ok {

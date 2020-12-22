@@ -1,29 +1,27 @@
 package core
 
 import (
-	"CrawlerX/duck"
 	"CrawlerX/mod"
 	"CrawlerX/parser"
+	"log"
 	"testing"
+	"time"
 )
 
 func TestPushSeed(t *testing.T) {
-	ps := make(map[string]duck.Parser)
-	ps["default"] = new(parser.PageBasicParser)
 	go func() {
 		out := SubResult()
 		for {
-			<-out
+			result := <-out
+			log.Printf("Got ==>\n %v", result.Value())
 		}
 	}()
-	InitEngine([]mod.Site{mod.Site{
-		Seed:           "",
-		Weight:         0,
-		Paths:          nil,
-		ExpirationDays: 0,
-		ParserName:     "",
-		WorkerSize:     0,
-		WorkerRate:     0,
-	}}, ps)()
-	select {}
+	StartEngine([]*mod.Site{&mod.Site{
+		Seed:       "https://www.jianshu.com/",
+		Paths:      []string{"/p/*"},
+		WorkerSize: 4,
+		WorkerRate: 200,
+		Parser:     new(parser.PageBasicParser),
+	}})
+	time.Sleep(time.Minute * 10)
 }

@@ -11,9 +11,7 @@ type GormModel struct {
 }
 
 var (
-	db         *gorm.DB
-	MysqlReady = false
-	EsReady    = false
+	db *gorm.DB
 )
 
 func OpenMySql(url string, maxIdleConns, maxOpenConns int, enableLog bool, models ...interface{}) (err error) {

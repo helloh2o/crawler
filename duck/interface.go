@@ -10,5 +10,5 @@ type Result interface {
 }
 
 type Parser interface {
-	Parse(*url.URL, io.Reader, func(string)) Result
+	Parse(*url.URL, io.Reader, []string, func(string)) Result
 }
