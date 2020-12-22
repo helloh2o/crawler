@@ -19,9 +19,9 @@ func TestPushSeed(t *testing.T) {
 	StartEngine([]*mod.Site{&mod.Site{
 		Seed:       "https://www.jianshu.com/",
 		Paths:      []string{"/p/*"},
-		WorkerSize: 4,
-		WorkerRate: 200,
-		Parser:     new(parser.PageBasicParser),
+		WorkerSize: 100,
+		WorkerRate: 50,
+		Parser:     new(parser.Jianshu),
 	}})
 	time.Sleep(time.Minute * 10)
 }

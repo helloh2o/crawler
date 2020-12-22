@@ -23,12 +23,13 @@ type worker struct {
 func runWorkerGroup(id int, site *mod.Site, output chan duck.Result) {
 	input := make(chan string, 10000*site.WorkerSize)
 	req := NewReq("")
+	rate := time.NewTicker(time.Millisecond * time.Duration(site.WorkerRate))
 	for i := 0; i < site.WorkerSize; i++ {
 		w := &worker{id: id}
 		w.req = req
 		w.in = input
 		w.out = output
-		w.rate = time.NewTicker(time.Millisecond * time.Duration(site.WorkerRate))
+		w.rate = rate
 		w.site = site
 		go w.Run()
 	}

@@ -8,13 +8,21 @@ import (
 	"log"
 	"net/url"
 	"runtime/debug"
-	"strings"
 )
 
-type Csdn func()
+type Jianshu func()
+
+/**
+	## 单行的标题
+	**粗体**
+	`console.log('行内代码')`
+	```js\n code \n``` 标记代码块
+	[内容](链接)
+	![文字说明](图片链接)
+**/
 
 // 基础解析器
-func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
+func (js *Jianshu) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -49,32 +57,23 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc
 			}
 		}
 	})
-	return csdn.getResult(doc, base).Value()
+	return js.getResult(doc, base)
 }
 
-func (csdn *Csdn) getResult(doc *goquery.Document, base *url.URL) duck.Result {
+func (js *Jianshu) getResult(doc *goquery.Document, base *url.URL) duck.Result {
 	result := &mod.Topic{}
-	// title
-	var description, keywords string
-	doc.Find("meta").Each(func(i int, selection *goquery.Selection) {
-		metaName, ok := selection.Attr("name")
-		if ok {
-			switch metaName {
-			case "description":
-				description, _ = selection.Attr("content")
-			case "keywords":
-				keywords, _ = selection.Attr("content")
-			}
+	title := doc.Find("title").Text()
+	result.Title = title
+	result.NodeId = 1
+	result.UserId = 1
+	doc.Find("div").Each(func(i int, selection *goquery.Selection) {
+		v, ok := selection.Attr("role")
+		if ok && v == "main" {
+			result.Content = selection.Text()
 		}
 	})
-	_ = description
-	_ = keywords
-	doc.Find("link").Each(func(i int, selection *goquery.Selection) {
-		rel, ok := selection.Attr("rel")
-		if ok {
-			if strings.Contains(strings.ToLower(rel), "ico") {
-			}
-		}
-	})
+	if result.Content == "" {
+		return nil
+	}
 	return result
 }

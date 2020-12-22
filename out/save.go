@@ -20,7 +20,7 @@ func Save(out <-chan duck.Result) {
 			}
 			indexName := config.Instance.EsIndex
 			if db.EsClient != nil {
-				if err := db.SavePage(indexName, result); err != nil {
+				if err := db.SaveTopic(indexName, result); err != nil {
 					log.Printf("ES save page err %v", err)
 				} else {
 					count++
@@ -28,7 +28,7 @@ func Save(out <-chan duck.Result) {
 			}
 			log.Printf("Save Result Count:: %d", count)
 			// 每1000条flush to disk
-			if count%1000 == 0 && db.EsClient != nil {
+			if count > 0 && count%1000 == 0 && db.EsClient != nil {
 				_, err := db.EsClient.Flush().Index(indexName).Do(context.Background())
 				if err != nil {
 					log.Printf("es flush error %v", err)

@@ -36,6 +36,7 @@ func OpenDB(dialect string, url string, maxIdleConns, maxOpenConns int, enableLo
 	if err = db.AutoMigrate(models...).Error; nil != err {
 		log.Printf("auto migrate tables failed: %s", err.Error())
 	}
+	log.Printf("mysql db is ready.")
 	return
 }
 

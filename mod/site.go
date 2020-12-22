@@ -18,5 +18,5 @@ type Site struct {
 	// 工人频率
 	WorkerRate int `yaml:"worker_rate"`
 	// 解析器
-	Parser duck.Parser
+	Parser duck.Parser `yaml:"-"`
 }

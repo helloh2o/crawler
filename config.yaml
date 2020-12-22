@@ -1,27 +1,25 @@
 # 数据库连接
-MySqlUrl: root:S8%$yICVgwMQD09fvka&!bwgSgNwB!^!@tcp(192.168.1.132:3306)/pages?charset=utf8mb4&parseTime=True&loc=Local
+MySqlUrl: root:123456@tcp(localhost:3306)/goodgirl_db?charset=utf8mb4&parseTime=True&loc=Local
 MySqlMaxIdle: 5
 MySqlMaxOpen: 10
 ShowSQL: false
 # ElasticSearch Data Node
 ESNode: http://localhost:9200
 # ES索引，类似mysql db_name
-EsIndex: goodgirl_topic_1
+EsIndex: goodgirl_topic
 CrawlParma:
   # 任务队列最大等待值 默认10万 200MB（超过该值新任务取消）, 内存保护，建议不要超过100万
   MaxWaitQueueSize: 100000
 # 抓取站点配置{seed: 种子页面地址, weight: 搜索权重}
 Sites:
-  - seed: "https://blog.csdn.net/"
+  - seed: "https://jianshu.com/"
     # 需要抓取的路径
-    paths: [ "*/article/details" ]
+    paths: [ "/p/*" ]
     # 页面解析器
-    parser: "csdn"
+    parser: "jianshu"
     # 抓取“工人” 个数, 建议单机不要超过5个, 太快了可能触发爬取对象网站的保护策略
     worker_size: 4
     # 抓取频率，“工人抓取” 间隔毫秒 ms, 最小50ms, 太小了可能触发爬取对象网站的保护策略, 还可能无法正常建立连接
-    worker_rate: 100
-  #- seed: "https://www.jianshu.com/"
+    worker_rate: 200
+    #- seed: "https://www.jianshu.com/"
     #paths: [ "/p/*" ]
-
-

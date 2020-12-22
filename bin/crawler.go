@@ -11,7 +11,7 @@ import (
 
 func main() {
 	config.Init("./config.yaml")
-	if err := db.OpenMySql(config.Instance.MySqlUrl, config.Instance.MySqlMaxIdle, config.Instance.MySqlMaxOpen, config.Instance.ShowSQL, &mod.PageInfo{}); err != nil {
+	if err := db.OpenMySql(config.Instance.MySqlUrl, config.Instance.MySqlMaxIdle, config.Instance.MySqlMaxOpen, config.Instance.ShowSQL, &mod.PageInfo{}, &mod.Topic{}); err != nil {
 		log.Printf("mysql error %v", err)
 	}
 	if err := db.InitESClient(config.Instance.ESNode, false); err != nil { //docker

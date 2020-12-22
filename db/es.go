@@ -44,6 +44,20 @@ func SavePage(index string, data interface{}) (err error) {
 	return errors.New(fmt.Sprintf("Unknown type %v", reflect.TypeOf(data)))
 }
 
+func SaveTopic(index string, data interface{}) (err error) {
+	if EsClient == nil {
+		return
+	}
+	ctx := context.Background()
+	p, ok := data.(*mod.Topic)
+	if ok {
+		id := strconv.Itoa(int(p.Id))
+		_, err = EsClient.Index().Index(index).Id(id).BodyJson(&p).Do(ctx)
+		return err
+	}
+	return errors.New(fmt.Sprintf("Unknown type %v", reflect.TypeOf(data)))
+}
+
 func DeleteIndex(index string) {
 	if EsClient == nil {
 		return
