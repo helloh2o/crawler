@@ -14,7 +14,7 @@ import (
 type Csdn func()
 
 // 基础解析器
-func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
+func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -27,6 +27,7 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc
 		return nil
 	}
 	// find all <a> tage
+	var nexts []string
 	doc.Find("a").Each(func(i int, selection *goquery.Selection) {
 		next, ok := selection.Attr("href")
 		if ok {
@@ -42,17 +43,17 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc
 						seed := info.String()
 						//log.Printf("find new seed name:%s url:%s", name, seed)
 						if isNext(info, paths) {
-							seedFuc(seed)
+							nexts = append(nexts, seed)
 						}
 					}
 				}
 			}
 		}
 	})
-	return csdn.getResult(doc, base).Value()
+	return csdn.getResult(doc, nexts)
 }
 
-func (csdn *Csdn) getResult(doc *goquery.Document, base *url.URL) duck.Result {
+func (csdn *Csdn) getResult(doc *goquery.Document, next []string) duck.Result {
 	result := &mod.Topic{}
 	// title
 	var description, keywords string
@@ -76,5 +77,7 @@ func (csdn *Csdn) getResult(doc *goquery.Document, base *url.URL) duck.Result {
 			}
 		}
 	})
+	result.SetNext(next)
+	result.V = result
 	return result
 }

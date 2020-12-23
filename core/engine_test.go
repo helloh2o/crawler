@@ -13,7 +13,7 @@ func TestPushSeed(t *testing.T) {
 		out := SubResult()
 		for {
 			result := <-out
-			log.Printf("Got ==>\n %v", result.Value())
+			log.Printf("Got ==>\n %v", result)
 		}
 	}()
 	StartEngine([]*mod.Site{&mod.Site{

@@ -15,19 +15,19 @@ type Req struct {
 }
 
 var (
-	agent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.3578.98 Safari/537.36"
+	UA = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.3578.98 Safari/537.36"
 )
 
-func NewReq(proxyUrl string) *Req {
+func NewHttpClient(proxyUrl ...string) *Req {
 	req := new(Req)
 	req.Client = http.Client{}
 	req.Jar = new(Jar)
 	req.Timeout = time.Second * 3
 	tr := &http.Transport{}
-	if proxyUrl != "" {
+	if len(proxyUrl) > 0 {
 		proxyFunc := func(r *http.Request) (*url.URL, error) {
-			r.Header.Set("User-Agent", agent)
-			return url.Parse(proxyUrl)
+			r.Header.Set("User-Agent", UA)
+			return url.Parse(proxyUrl[0])
 		}
 		tr.Proxy = proxyFunc
 	}
@@ -35,28 +35,35 @@ func NewReq(proxyUrl string) *Req {
 	req.Transport = tr
 	return req
 }
-
-func (req *Req) Crawl(targetUrl string, callback func(*url.URL, io.Reader)) {
-	urlInfo, err := url.Parse(targetUrl)
-	if err != nil {
-		log.Printf("can't parse url error %v", err)
-	}
-	reqInfo, err := http.NewRequest("GET", targetUrl, nil)
-	if err != nil {
-		log.Printf("new http request for url %s error", targetUrl)
-		return
-	}
-	reqInfo.Header.Add("Host", urlInfo.Host)
-	reqInfo.Header.Add("User-Agent", agent)
-	resp, err := req.Do(reqInfo)
-	if err != nil {
-		log.Printf("do request error %v", err)
-		return
-	}
-	if resp.StatusCode == 200 {
-		if callback != nil {
-			callback(urlInfo, resp.Body)
+func (req *Req) DoReq(method string, targetUrl string, callback func(*url.URL, io.Reader)) {
+	switch method {
+	case "POST", "GET", "PUT", "DELETE", "HEAD":
+		urlInfo, err := url.Parse(targetUrl)
+		if err != nil {
+			log.Printf("can't parse url error %v", err)
 		}
+		reqInfo, err := http.NewRequest(method, targetUrl, nil)
+		if err != nil {
+			log.Printf("new http request for url %s error", targetUrl)
+			return
+		}
+		reqInfo.Header.Add("Host", urlInfo.Host)
+		reqInfo.Header.Add("User-Agent", UA)
+		var resp *http.Response
+		resp, err = req.Do(reqInfo)
+		if err != nil {
+			log.Printf("do request error %v", err)
+			return
+		}
+		if resp.StatusCode == 200 {
+			if callback != nil {
+				callback(urlInfo, resp.Body)
+			}
+		} else {
+			log.Printf("resp code %d not ok", resp.StatusCode)
+		}
+	default:
+		log.Printf("no support method %s", method)
 	}
 }
 

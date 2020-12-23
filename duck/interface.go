@@ -6,9 +6,11 @@ import (
 )
 
 type Result interface {
-	Value() Result
+	GetNext() []string
+	SetNext([]string)
+	Value() interface{}
 }
 
 type Parser interface {
-	Parse(*url.URL, io.Reader, []string, func(string)) Result
+	Parse(*url.URL, io.Reader, []string) Result
 }

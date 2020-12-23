@@ -1,9 +1,5 @@
 package mod
 
-import (
-	"CrawlerX/duck"
-)
-
 // 网页结构体
 type PageInfo struct {
 	Id int64 `gorm:"primarykey" json:"id"`
@@ -26,9 +22,17 @@ type PageInfo struct {
 	// 过期时间
 	Expiration int64 `gorm:"COMMENT:'过期时间'" json:"expiration"`
 	// ico
-	ICO string `gorm:"COMMENT:'网站小图标'" json:"ico"`
+	ICO  string      `gorm:"COMMENT:'网站小图标'" json:"ico"`
+	next []string    `gorm:"-" json:"next"`
+	V    interface{} `gorm:"-" json:"v"`
 }
 
-func (pg *PageInfo) Value() duck.Result {
-	return pg
+func (pg *PageInfo) SetNext(tasks []string) {
+	pg.next = tasks
+}
+func (pg *PageInfo) GetNext() []string {
+	return pg.next
+}
+func (pg *PageInfo) Value() interface{} {
+	return pg.V
 }

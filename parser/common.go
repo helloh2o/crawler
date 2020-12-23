@@ -16,7 +16,7 @@ import (
 type PageBasicParser func()
 
 // 基础解析器
-func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
+func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, paths []string) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -29,6 +29,7 @@ func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, paths []strin
 		return nil
 	}
 	// find all <a> tage
+	var nexts []string
 	doc.Find("a").Each(func(i int, selection *goquery.Selection) {
 		next, ok := selection.Attr("href")
 		if ok {
@@ -44,14 +45,14 @@ func (cmm *PageBasicParser) Parse(base *url.URL, reader io.Reader, paths []strin
 						seed := info.String()
 						//log.Printf("find new seed name:%s url:%s", name, seed)
 						if isNext(info, paths) {
-							seedFuc(seed)
+							nexts = append(nexts, seed)
 						}
 					}
 				}
 			}
 		}
 	})
-	return cmm.getResult(doc, base).Value()
+	return cmm.getResult(doc, base, nexts)
 }
 
 func isNext(info *url.URL, paths []string) bool {
@@ -88,7 +89,7 @@ func isNext(info *url.URL, paths []string) bool {
 	return false
 }
 
-func (cmm *PageBasicParser) getResult(doc *goquery.Document, base *url.URL) duck.Result {
+func (cmm *PageBasicParser) getResult(doc *goquery.Document, base *url.URL, next []string) duck.Result {
 	result := &mod.PageInfo{}
 	// title
 	title := doc.Find("title").Text()
@@ -120,5 +121,7 @@ func (cmm *PageBasicParser) getResult(doc *goquery.Document, base *url.URL) duck
 	result.Description = description
 	result.URL = base.String()
 	result.CreateAt = time.Now().Unix()
+	result.SetNext(next)
+	result.V = result
 	return result
 }

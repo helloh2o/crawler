@@ -22,7 +22,7 @@ type Jianshu func()
 **/
 
 // 基础解析器
-func (js *Jianshu) Parse(base *url.URL, reader io.Reader, paths []string, seedFuc func(string)) duck.Result {
+func (js *Jianshu) Parse(base *url.URL, reader io.Reader, paths []string) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -35,6 +35,7 @@ func (js *Jianshu) Parse(base *url.URL, reader io.Reader, paths []string, seedFu
 		return nil
 	}
 	// find all <a> tage
+	var nexts []string
 	doc.Find("a").Each(func(i int, selection *goquery.Selection) {
 		next, ok := selection.Attr("href")
 		if ok {
@@ -50,17 +51,17 @@ func (js *Jianshu) Parse(base *url.URL, reader io.Reader, paths []string, seedFu
 						seed := info.String()
 						//log.Printf("find new seed name:%s url:%s", name, seed)
 						if isNext(info, paths) {
-							seedFuc(seed)
+							nexts = append(nexts, seed)
 						}
 					}
 				}
 			}
 		}
 	})
-	return js.getResult(doc, base)
+	return js.getResult(doc, nexts)
 }
 
-func (js *Jianshu) getResult(doc *goquery.Document, base *url.URL) duck.Result {
+func (js *Jianshu) getResult(doc *goquery.Document, next []string) duck.Result {
 	result := &mod.Topic{}
 	title := doc.Find("title").Text()
 	result.Title = title
@@ -73,7 +74,10 @@ func (js *Jianshu) getResult(doc *goquery.Document, base *url.URL) duck.Result {
 		}
 	})
 	if result.Content == "" {
-		return nil
+		result.V = nil
+	} else {
+		result.V = result
 	}
+	result.SetNext(next)
 	return result
 }

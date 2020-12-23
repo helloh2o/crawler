@@ -22,7 +22,7 @@ type worker struct {
 
 func runWorkerGroup(id int, site *mod.Site, output chan duck.Result) {
 	input := make(chan string, 10000*site.WorkerSize)
-	req := NewReq("")
+	req := NewHttpClient()
 	rate := time.NewTicker(time.Millisecond * time.Duration(site.WorkerRate))
 	for i := 0; i < site.WorkerSize; i++ {
 		w := &worker{id: id}
@@ -44,9 +44,21 @@ func (w *worker) Consume() {
 			w.history.Store(target, true)
 			log.Printf("worker %d get target %s", w.id, target)
 			<-w.rate.C
-			// 请求
-			go w.req.Crawl(target, func(req *url.URL, reader io.Reader) {
-				result := w.site.Parser.Parse(req, reader, w.site.Paths, func(task string) {
+			// 请求 (TODO 分布式)
+			go w.DoParse(target)
+		}
+	}()
+}
+
+func (w *worker) DoParse(target string) {
+	w.req.DoReq("GET", target, func(req *url.URL, reader io.Reader) {
+		result := w.site.Parser.Parse(req, reader, w.site.Paths)
+		if result != nil {
+			if result.Value() != nil {
+				output <- result
+			}
+			if len(result.GetNext()) > 0 {
+				for _, task := range result.GetNext() {
 					if _, ok := w.history.Load(task); ok {
 						return
 					}
@@ -54,13 +66,10 @@ func (w *worker) Consume() {
 					case w.in <- task:
 					default:
 					}
-				})
-				if result != nil {
-					output <- result
 				}
-			})
+			}
 		}
-	}()
+	})
 }
 
 func (w *worker) Run() {
