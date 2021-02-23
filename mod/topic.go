@@ -19,7 +19,7 @@ type Topic struct {
 	CreateTime      int64       `gorm:"index:idx_topic_create_time" json:"createTime" form:"createTime"`                 // 创建时间
 	ExtraData       string      `gorm:"type:text" json:"extraData" form:"extraData"`                                     // 扩展数据
 	next            []string    `gorm:"-" json:"next"`
-	V               interface{} `gorm:"-" json:"v"`
+	V               interface{} `gorm:"-" json:"-"`
 }
 
 func (tp *Topic) SetNext(tasks []string) {

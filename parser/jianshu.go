@@ -8,6 +8,8 @@ import (
 	"log"
 	"net/url"
 	"runtime/debug"
+	"strings"
+	"time"
 )
 
 type Jianshu func()
@@ -62,15 +64,26 @@ func (js *Jianshu) Parse(base *url.URL, reader io.Reader, paths []string) duck.R
 }
 
 func (js *Jianshu) getResult(doc *goquery.Document, next []string) duck.Result {
-	result := &mod.Topic{}
+	result := &mod.Topic{
+		CreateTime: time.Now().UnixNano() / int64(time.Millisecond),
+	}
+	result.LastCommentTime = result.CreateTime
 	title := doc.Find("title").Text()
-	result.Title = title
+	result.Title = strings.Replace(title, "- 简书", "", -1)
 	result.NodeId = 1
 	result.UserId = 1
 	doc.Find("div").Each(func(i int, selection *goquery.Selection) {
 		v, ok := selection.Attr("role")
 		if ok && v == "main" {
-			result.Content = selection.Text()
+			var err error
+			result.Content, err = selection.Html()
+			idx := strings.Index(result.Content, "推荐阅读")
+			result.Content = result.Content[:idx]
+			if err != nil {
+				return
+			} else {
+				result.Content = Convert(result.Content)
+			}
 		}
 	})
 	if result.Content == "" {
