@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-type Jianshu func()
+type Jianshu struct{}
 
 /**
 	## 单行的标题
@@ -78,11 +78,14 @@ func (js *Jianshu) getResult(doc *goquery.Document, next []string) duck.Result {
 			var err error
 			result.Content, err = selection.Html()
 			idx := strings.Index(result.Content, "推荐阅读")
-			result.Content = result.Content[:idx]
+			if idx != -1 {
+				result.Content = result.Content[:idx]
+			}
 			if err != nil {
 				return
 			} else {
 				result.Content = Convert(result.Content)
+				result.Content = strings.Replace(result.Content, "data-original-src=", "src=", -1)
 			}
 		}
 	})

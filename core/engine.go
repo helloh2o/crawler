@@ -3,10 +3,12 @@ package core
 import (
 	"CrawlerX/duck"
 	"CrawlerX/mod"
+	"sync"
 )
 
 var (
-	output = make(chan duck.Result, 10000)
+	output  = make(chan duck.Result, 10000)
+	history sync.Map
 )
 
 // 订阅输出结果通道

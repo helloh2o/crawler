@@ -1,28 +1,27 @@
 package core
 
 import (
+	"CrawlerX/config"
 	"CrawlerX/duck"
 	"CrawlerX/mod"
 	"io"
 	"log"
 	"net/url"
-	"sync"
 	"time"
 )
 
 type worker struct {
-	id      int
-	in      chan string
-	out     chan duck.Result
-	rate    *time.Ticker
-	req     *Req
-	site    *mod.Site
-	history sync.Map
+	id   int
+	in   chan string
+	out  chan duck.Result
+	rate *time.Ticker
+	req  *Req
+	site *mod.Site
 }
 
 func runWorkerGroup(id int, site *mod.Site, output chan duck.Result) {
 	input := make(chan string, 10000*site.WorkerSize)
-	req := NewHttpClient()
+	req := NewHttpClient(config.Instance.Proxy)
 	rate := time.NewTicker(time.Millisecond * time.Duration(site.WorkerRate))
 	for i := 0; i < site.WorkerSize; i++ {
 		w := &worker{id: id}
@@ -41,11 +40,11 @@ func (w *worker) Consume() {
 	go func() {
 		for {
 			target := <-w.in
-			w.history.Store(target, true)
+			history.Store(target, true)
 			log.Printf("worker %d get target %s", w.id, target)
 			<-w.rate.C
 			// 请求 (TODO 分布式)
-			go w.DoParse(target)
+			go w.DoParse(target) // 同步
 		}
 	}()
 }
@@ -59,12 +58,14 @@ func (w *worker) DoParse(target string) {
 			}
 			if len(result.GetNext()) > 0 {
 				for _, task := range result.GetNext() {
-					if _, ok := w.history.Load(task); ok {
+					if _, ok := history.Load(task); ok {
 						return
 					}
 					select {
 					case w.in <- task:
+						log.Printf("add next task %s", task)
 					default:
+						log.Printf("worker is busy.")
 					}
 				}
 			}

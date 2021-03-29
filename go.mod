@@ -4,6 +4,7 @@ go 1.15
 
 require (
 	github.com/PuerkitoBio/goquery v1.5.1
+	github.com/bregydoc/gtranslate v0.0.0-20200913051839-1bd07f6c1fc5
 	github.com/iris-contrib/middleware/cors v0.0.0-20201017024110-39b50ffeb885
 	github.com/jinzhu/gorm v1.9.16
 	github.com/jinzhu/now v1.1.1 // indirect
@@ -24,6 +25,7 @@ require (
 	github.com/pingcap/tidb v2.0.11+incompatible // indirect
 	github.com/prometheus/common v0.4.0
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
+	github.com/robertkrimen/otto v0.0.0-20200922221731-ef014fd054ac // indirect
 	github.com/siddontang/go-log v0.0.0-20190221022429-1e957dd83bed
 	github.com/siddontang/go-mysql-elasticsearch v0.0.0-20200822025838-fe261969558b
 	github.com/smartystreets/goconvey v1.6.4 // indirect
@@ -34,8 +36,10 @@ require (
 	github.com/yudai/pp v2.0.1+incompatible // indirect
 	go.etcd.io/bbolt v1.3.5 // indirect
 	go.uber.org/zap v1.16.0 // indirect
+	golang.org/x/text v0.3.3
 	google.golang.org/grpc/examples v0.0.0-20201106192519-9c2f82d9a79c // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.0.0 // indirect
+	gopkg.in/sourcemap.v1 v1.0.5 // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 	gopkg.in/yaml.v2 v2.3.0
 	sigs.k8s.io/yaml v1.2.0 // indirect

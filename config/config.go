@@ -15,6 +15,8 @@ type Config struct {
 	MySqlMaxIdle int    `yaml:"MySqlMaxIdle"`
 	MySqlMaxOpen int    `yaml:"MySqlMaxOpen"`
 	ShowSQL      bool   `yaml:"ShowSQL"`
+	// proxy
+	Proxy string `yaml:"Proxy"`
 	// ES node
 	ESNode  string `yaml:"ESNode"`
 	EsIndex string `yaml:"EsIndex"`
@@ -50,9 +52,13 @@ func Init(filename string) {
 func registerParseByName(site *mod.Site) {
 	switch site.ParserName {
 	case "csdn":
-		site.Parser = new(parser.Csdn)
+		site.Parser = &parser.Csdn{}
 	case "jianshu":
-		site.Parser = new(parser.Jianshu)
+		site.Parser = &parser.Jianshu{}
+	case "toutiao":
+		site.Parser = &parser.Toutiao{}
+	case "qqnews":
+		site.Parser = &parser.QQNews{}
 	default:
 		site.Parser = new(parser.PageBasicParser)
 	}

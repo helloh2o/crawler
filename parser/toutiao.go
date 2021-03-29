@@ -9,12 +9,22 @@ import (
 	"net/url"
 	"runtime/debug"
 	"strings"
+	"time"
 )
 
-type Csdn struct{}
+type Toutiao struct{}
+
+/**
+	## 单行的标题
+	**粗体**
+	`console.log('行内代码')`
+	```js\n code \n``` 标记代码块
+	[内容](链接)
+	![文字说明](图片链接)
+**/
 
 // 基础解析器
-func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string) duck.Result {
+func (kk *Toutiao) Parse(base *url.URL, reader io.Reader, paths []string) duck.Result {
 	defer func() {
 		if r := recover(); r != nil {
 			log.Printf("recover from panic %v", r)
@@ -22,6 +32,7 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string) duck.Re
 		}
 	}()
 	doc, err := goquery.NewDocumentFromReader(reader)
+	log.Println(doc.Html())
 	if err != nil {
 		log.Printf("read html document error %v", err)
 		return nil
@@ -30,6 +41,9 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string) duck.Re
 	var nexts []string
 	doc.Find("a").Each(func(i int, selection *goquery.Selection) {
 		next, ok := selection.Attr("href")
+		if len(next) <= 1 || strings.Contains(next, "@") {
+			return
+		}
 		if ok {
 			if next != "" {
 				info, err := url.Parse(next)
@@ -50,34 +64,31 @@ func (csdn *Csdn) Parse(base *url.URL, reader io.Reader, paths []string) duck.Re
 			}
 		}
 	})
-	return csdn.getResult(doc, nexts)
+	return kk.getResult(doc, nexts)
 }
 
-func (csdn *Csdn) getResult(doc *goquery.Document, next []string) duck.Result {
-	result := &mod.Topic{}
-	// title
-	var description, keywords string
-	doc.Find("meta").Each(func(i int, selection *goquery.Selection) {
-		metaName, ok := selection.Attr("name")
-		if ok {
-			switch metaName {
-			case "description":
-				description, _ = selection.Attr("content")
-			case "keywords":
-				keywords, _ = selection.Attr("content")
+func (kk *Toutiao) getResult(doc *goquery.Document, next []string) duck.Result {
+	result := &mod.Topic{
+		CreateTime: time.Now().UnixNano() / int64(time.Millisecond),
+	}
+	result.LastCommentTime = result.CreateTime
+	title := doc.Find("title").Text()
+	result.Title = title
+	result.NodeId = 1
+	result.UserId = 1
+	doc.Find(".article-content").Each(func(i int, selection *goquery.Selection) {
+		if result.Content == "" {
+			var err error
+			if result.Content, err = selection.Html(); err == nil {
+				result.Content = Convert(result.Content)
 			}
 		}
 	})
-	_ = description
-	_ = keywords
-	doc.Find("link").Each(func(i int, selection *goquery.Selection) {
-		rel, ok := selection.Attr("rel")
-		if ok {
-			if strings.Contains(strings.ToLower(rel), "ico") {
-			}
-		}
-	})
+	if result.Content == "" {
+		result.V = nil
+	} else {
+		result.V = result
+	}
 	result.SetNext(next)
-	result.V = result
 	return result
 }

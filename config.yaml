@@ -12,14 +12,12 @@ CrawlParma:
   MaxWaitQueueSize: 100000
 # 抓取站点配置{seed: 种子页面地址, weight: 搜索权重}
 Sites:
-  - seed: "https://jianshu.com/"
+  - seed: "https://i.news.qq.com/trpc.qqnews_web.kv_srv.kv_srv_http_proxy/list?sub_srv_id=finance&srv_id=pc&offset=0&limit=20&strategy=1&ext={%22pool%22:[%22top%22],%22is_filter%22:2,%22check_type%22:true}"
     # 需要抓取的路径
-    paths: [ "/p/*" ]
+    paths: [ "/*" ]
     # 页面解析器
-    parser: "jianshu"
+    parser: "qqnews"
     # 抓取“工人” 个数, 建议单机不要超过5个, 太快了可能触发爬取对象网站的保护策略
-    worker_size: 4
+    worker_size: 1
     # 抓取频率，“工人抓取” 间隔毫秒 ms, 最小50ms, 太小了可能触发爬取对象网站的保护策略, 还可能无法正常建立连接
-    worker_rate: 200
-    #- seed: "https://www.jianshu.com/"
-    #paths: [ "/p/*" ]
+    worker_rate: 2000

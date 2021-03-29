@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="BranchesTreeState">
     <expand />
     <select>
@@ -10,12 +13,29 @@
     </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1b76a80f-a5b7-426d-b342-84c48af087cb" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/parser/html2markdown.go" afterDir="false" />
+    <list default="true" id="1b76a80f-a5b7-426d-b342-84c48af087cb" name="Default Changelist" comment="html to md">
+      <change afterPath="$PROJECT_DIR$/node/signature.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/toutiao_finance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/node/toutiao_hot.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parser/qqnews.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/parser/toutiao.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/translate/google.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/translate/google_test.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/validator/validate.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/validator/validate_go.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/validator/validate_go_test.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/crawler.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/crawler.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/bin/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/config.go" beforeDir="false" afterPath="$PROJECT_DIR$/config/config.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/engine.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/engine.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/request.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/request.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/worker.go" beforeDir="false" afterPath="$PROJECT_DIR$/core/worker.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/mod/topic.go" beforeDir="false" afterPath="$PROJECT_DIR$/mod/topic.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/parser/csdn.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/csdn.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/parser/jianshu.go" beforeDir="false" afterPath="$PROJECT_DIR$/parser/jianshu.go" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="true" />
@@ -28,6 +48,7 @@
       <list>
         <option value="HTML File" />
         <option value="Go Application" />
+        <option value="JavaScript File" />
         <option value="Go File" />
       </list>
     </option>
@@ -50,27 +71,27 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/parser" />
-    <property name="settings.editor.selected.configurable" value="Shelf.Project.Settings" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/node" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\crawler\node" />
+      <recent name="C:\Users\ay\go\src\crawler\core" />
       <recent name="C:\Users\ay\go\src\crawler\parser" />
       <recent name="C:\Users\ayoo\go\src\crawler\search\inner" />
       <recent name="C:\Users\ayoo\go\src\crawler\doc" />
-      <recent name="C:\Users\ayoo\go\src\crawler\bin" />
-      <recent name="C:\Users\ayoo\go\src\crawler" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\ay\go\src\crawler\node" />
+      <recent name="C:\Users\ay\go\src\crawler\validator" />
       <recent name="C:\Users\ayoo\go\src\crawler\search" />
       <recent name="C:\Users\ayoo\go\src\crawler\tool\cp" />
       <recent name="C:\Users\ayoo\go\src\crawler\doc" />
-      <recent name="C:\Users\ayoo\go\src\crawler\search\bin" />
-      <recent name="C:\Users\ayoo\go\src\crawler\search\static" />
     </key>
   </component>
-  <component name="RunManager" selected="Go Build.go build CrawlerX/bin">
+  <component name="RunManager" selected="Go Test.google_test.go (1)">
     <configuration name="go build CrawlerX/bin" type="GoApplicationRunConfiguration" factoryName="Go Application" temporary="true" nameIsGenerated="true">
       <module name="crawler" />
       <working_directory value="$PROJECT_DIR$" />
@@ -80,62 +101,63 @@
       <directory value="$PROJECT_DIR$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestPushSeed in CrawlerX/core (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGoogleTranslate in CrawlerX/translate (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="crawler" />
-      <working_directory value="$PROJECT_DIR$/core" />
+      <working_directory value="$PROJECT_DIR$/translate" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="CrawlerX/core" />
+      <package value="CrawlerX/translate" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestPushSeed\E$" />
+      <pattern value="^\QTestGoogleTranslate\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="TestPushSeed in CrawlerX/core" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGoogleTranslate in CrawlerX/translate (2)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="crawler" />
-      <working_directory value="$PROJECT_DIR$/core" />
+      <working_directory value="$PROJECT_DIR$/translate" />
       <framework value="gotest" />
       <kind value="PACKAGE" />
-      <package value="CrawlerX/core" />
+      <package value="CrawlerX/translate" />
       <directory value="$PROJECT_DIR$" />
       <filePath value="$PROJECT_DIR$" />
-      <pattern value="^\QTestPushSeed\E$" />
+      <pattern value="^\QTestGoogleTranslate\E$" />
       <method v="2" />
     </configuration>
-    <configuration name="engine_test.go (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+    <configuration name="TestGoogleTranslate in CrawlerX/translate" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
       <module name="crawler" />
-      <working_directory value="$PROJECT_DIR$/core" />
+      <working_directory value="$PROJECT_DIR$/translate" />
+      <framework value="gotest" />
+      <kind value="PACKAGE" />
+      <package value="CrawlerX/translate" />
+      <directory value="$PROJECT_DIR$" />
+      <filePath value="$PROJECT_DIR$" />
+      <pattern value="^\QTestGoogleTranslate\E$" />
+      <method v="2" />
+    </configuration>
+    <configuration name="google_test.go (1)" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
+      <module name="crawler" />
+      <working_directory value="$PROJECT_DIR$/translate" />
       <framework value="gotest" />
       <kind value="FILE" />
       <package value="CrawlerX" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/core/engine_test.go" />
-      <method v="2" />
-    </configuration>
-    <configuration name="engine_test.go" type="GoTestRunConfiguration" factoryName="Go Test" temporary="true" nameIsGenerated="true">
-      <module name="crawler" />
-      <working_directory value="$PROJECT_DIR$/core" />
-      <framework value="gotest" />
-      <kind value="FILE" />
-      <package value="CrawlerX" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$/core/engine_test.go" />
+      <filePath value="$PROJECT_DIR$/translate/google_test.go" />
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Go Test.TestGoogleTranslate in CrawlerX/translate" />
+      <item itemvalue="Go Test.TestGoogleTranslate in CrawlerX/translate (1)" />
+      <item itemvalue="Go Test.TestGoogleTranslate in CrawlerX/translate (2)" />
       <item itemvalue="Go Build.go build CrawlerX/bin" />
-      <item itemvalue="Go Test.TestPushSeed in CrawlerX/core" />
-      <item itemvalue="Go Test.engine_test.go" />
-      <item itemvalue="Go Test.TestPushSeed in CrawlerX/core (1)" />
-      <item itemvalue="Go Test.engine_test.go (1)" />
+      <item itemvalue="Go Test.google_test.go (1)" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Go Test.google_test.go (1)" />
+        <item itemvalue="Go Test.TestGoogleTranslate in CrawlerX/translate (2)" />
         <item itemvalue="Go Build.go build CrawlerX/bin" />
-        <item itemvalue="Go Test.TestPushSeed in CrawlerX/core (1)" />
-        <item itemvalue="Go Test.engine_test.go (1)" />
-        <item itemvalue="Go Test.TestPushSeed in CrawlerX/core" />
-        <item itemvalue="Go Test.engine_test.go" />
+        <item itemvalue="Go Test.TestGoogleTranslate in CrawlerX/translate (1)" />
+        <item itemvalue="Go Test.TestGoogleTranslate in CrawlerX/translate" />
       </list>
     </recent_temporary>
   </component>
@@ -165,7 +187,6 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="1. 浅分页限制" />
     <MESSAGE value="1. 深度分页支持 &amp; 测试" />
     <MESSAGE value="1. api深度分页支持 &amp; 测试" />
     <MESSAGE value="1. deep bug fixed." />
@@ -190,7 +211,8 @@
     <MESSAGE value="cache task" />
     <MESSAGE value="try craw jianshu.com" />
     <MESSAGE value="next in result" />
-    <option name="LAST_COMMIT_MESSAGE" value="next in result" />
+    <MESSAGE value="html to md" />
+    <option name="LAST_COMMIT_MESSAGE" value="html to md" />
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
@@ -201,79 +223,97 @@
     </environment>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2820" y="0" width="804" height="742" key="CommitChangelistDialog2" timestamp="1608714914031">
+    <state x="2334" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1615198885270">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="900" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608625960539" />
-    <state x="2820" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608714914031" />
-    <state x="900" y="209" width="804" height="742" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1607064042101" />
-    <state x="847" y="373" key="EnvironmentVariablesDialog" timestamp="1607068941224">
+    <state x="2334" y="175" width="1092" height="714" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1615198885270" />
+    <state x="900" y="0" width="804" height="742" key="CommitChangelistDialog2" timestamp="1616149038901">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="847" y="373" key="EnvironmentVariablesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1607068941224" />
+    <state x="900" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616149038901" />
+    <state x="2820" y="0" key="CommitChangelistDialog2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614076126564" />
     <state x="740" y="275" key="FileChooserDialogImpl" timestamp="1608111975753">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="275" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1608111975753" />
-    <state width="1877" height="378" key="GridCell.Tab.0.bottom" timestamp="1614075702579">
+    <state width="1877" height="473" key="GridCell.Tab.0.bottom" timestamp="1617011860653">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614071213296" />
-    <state width="1877" height="378" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702579" />
-    <state width="1877" height="378" key="GridCell.Tab.0.center" timestamp="1614075702579">
+    <state width="1877" height="505" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009847315" />
+    <state width="1877" height="473" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860653" />
+    <state width="1877" height="473" key="GridCell.Tab.0.center" timestamp="1617011860653">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="247" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614071213296" />
-    <state width="1877" height="378" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702579" />
-    <state width="1877" height="378" key="GridCell.Tab.0.left" timestamp="1614075702579">
+    <state width="1877" height="505" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009847315" />
+    <state width="1877" height="473" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860653" />
+    <state width="1877" height="473" key="GridCell.Tab.0.left" timestamp="1617011860653">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="247" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614071213296" />
-    <state width="1877" height="378" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702579" />
-    <state width="1877" height="378" key="GridCell.Tab.0.right" timestamp="1614075702579">
+    <state width="1877" height="505" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009847315" />
+    <state width="1877" height="473" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860653" />
+    <state width="1877" height="473" key="GridCell.Tab.0.right" timestamp="1617011860653">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="247" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1614071213296" />
-    <state width="1877" height="378" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702579" />
-    <state width="1877" height="378" key="GridCell.Tab.1.bottom" timestamp="1614075702483">
+    <state width="1877" height="505" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009847315" />
+    <state width="1877" height="473" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860653" />
+    <state width="1877" height="473" key="GridCell.Tab.1.bottom" timestamp="1617011860549">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="603" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608626284464" />
-    <state width="1877" height="378" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702483" />
-    <state width="1877" height="378" key="GridCell.Tab.1.center" timestamp="1614075702482">
+    <state width="1877" height="505" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009846052" />
+    <state width="1877" height="473" key="GridCell.Tab.1.bottom/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860549" />
+    <state width="1877" height="473" key="GridCell.Tab.1.center" timestamp="1617011860549">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="603" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608626284464" />
-    <state width="1877" height="378" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702482" />
-    <state width="1877" height="378" key="GridCell.Tab.1.left" timestamp="1614075702482">
+    <state width="1877" height="505" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009846052" />
+    <state width="1877" height="473" key="GridCell.Tab.1.center/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860549" />
+    <state width="1877" height="473" key="GridCell.Tab.1.left" timestamp="1617011860549">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="603" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608626284464" />
-    <state width="1877" height="378" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702482" />
-    <state width="1877" height="378" key="GridCell.Tab.1.right" timestamp="1614075702482">
+    <state width="1877" height="505" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009846052" />
+    <state width="1877" height="473" key="GridCell.Tab.1.left/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860549" />
+    <state width="1877" height="473" key="GridCell.Tab.1.right" timestamp="1617011860549">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="603" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608626284464" />
-    <state width="1877" height="378" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075702482" />
-    <state x="461" y="164" key="SettingsEditor" timestamp="1607063721630">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1877" height="505" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1617009846052" />
+    <state width="1877" height="473" key="GridCell.Tab.1.right/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617011860549" />
+    <state x="2381" y="164" key="SettingsEditor" timestamp="1616121252242">
+      <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="461" y="164" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1607063721630" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1608714915640">
+    <state x="2381" y="164" key="SettingsEditor/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616121252242" />
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2" timestamp="1616134675598">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="552" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1608625963886" />
-    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1608714915640" />
-    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1614075178044">
+    <state x="2472" y="249" key="Vcs.Push.Dialog.v2/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616134675598" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup" timestamp="1617010191548">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1614075178044" />
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1607063571963">
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615259110394" />
+    <state width="968" height="528" key="XDebugger.FullValuePopup/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1617010191548" />
+    <state x="2157" y="41" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1616149335374">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2157" y="41" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1616149335374" />
+    <state x="57" y="132" width="1736" height="856" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616123870334" />
+    <state x="663" y="207" width="594" height="626" key="find.popup" timestamp="1615256714761">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1607063571963" />
+    <state x="663" y="207" width="594" height="626" key="find.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1615256714761" />
+    <state x="2602" y="424" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1616402677229">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2602" y="424" key="vcs.readOnlyHandler.ReadOnlyStatusDialog/0.0.1920.1040/1920.0.1920.1040@1920.0.1920.1040" timestamp="1616402677229" />
   </component>
   <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/Programs/Python/Python39/Lib/site-packages/requests/models.py</url>
+          <line>888</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
     <watches-manager>
       <configuration name="GoApplicationRunConfiguration">
         <watch expression="sites" />

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta
+            name="viewport"
+            content="width=device-width,initial-scale=1,maximum-scale=1"
+    />
+    <title>正在驗證您的訪問請求…</title>
+    <style type="text/css">
+        body,
+        html {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            background-color: #fff;
+            font-family: Helvetica, Arial, sans-serif;
+            font-size: 100%;
+        }
+        h1 {
+            font-size: 1.5em;
+            color: #404040;
+            text-align: center;
+        }
+        p {
+            font-size: 0.9em;
+            color: #404040;
+            text-align: center;
+            margin: 10px 0 0 0;
+        }
+        #spinner {
+            margin: 0 auto 30px auto;
+            display: block;
+        }
+        .attribution {
+            margin-top: 20px;
+        }
+        @-webkit-keyframes bubbles {
+        33%: {
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+        }
+        66% {
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+        }
+        100% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+        }
+        @keyframes bubbles {
+        33%: {
+            -webkit-transform: translateY(10px);
+            transform: translateY(10px);
+        }
+        66% {
+            -webkit-transform: translateY(-10px);
+            transform: translateY(-10px);
+        }
+        100% {
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+        }
+        .bubbles {
+            background-color: #404040;
+            width: 15px;
+            height: 15px;
+            margin: 2px;
+            border-radius: 100%;
+            -webkit-animation: bubbles 0.6s 70ms infinite ease-in-out;
+            animation: bubbles 0.6s 70ms infinite ease-in-out;
+            -webkit-animation-fill-mode: both;
+            animation-fill-mode: both;
+            display: inline-block;
+        }
+        .grecaptcha-badge {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+<table width="100%" height="100%" cellpadding="20">
+    <tbody>
+    <tr>
+        <td align="center" valign="middle">
+            <div>
+                <noscript>
+                    <h1 style="color: #bd2426">
+                        請啓用瀏覽器的Javascript功能後重載本頁面
+                    </h1>
+                </noscript>
+                <div id="content" style="display: none">
+                    <div>
+                        <div class="bubbles"></div>
+                        <div class="bubbles"></div>
+                        <div class="bubbles"></div>
+                    </div>
+                    <h1><span>正在驗證您的訪問請求</span></h1>
+                    <p>
+                        系統偵測到您的電腦網路發出了異常流量，您需經驗證才能訪問我們的網站。
+                    </p>
+                    <p>驗證過程將自動完成，您只需等待數秒…</p>
+                </div>
+                <form id="challenge-form" method="post" action="/challenge.html">
+                    <input
+                            type="hidden"
+                            value="YjAwZTcwYjQwNTJjZDg1OWVhNTQwYzM1OWVmYjVlY2YzOWVkNGM0MVsxNjE1MjU1ODAzLjYyMTY1NiwiMTAzLjEzNS4yNTAuMTE4IiwiXC9lbW90aW9uXC8iXQ--"
+                            name="ctx"
+                    /><input type="hidden" value="" name="ans" id="js-ans" />
+                </form>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<script type="text/javascript">
+    !(function (e) {
+        (document.getElementById("content").style.display = "block"),
+            (e.captchaReady = function () {
+                grecaptcha.execute("6LfRG68UAAAAAMToh2v5n7aqfEyrhVD584F8JL20", {
+                        action: "pageview",
+                    }).then(function (e) {
+                        (document.getElementById("js-ans").value = e),document.getElementById("challenge-form").submit();
+                    });
+            });
+    })(window);
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render=6LfRG68UAAAAAMToh2v5n7aqfEyrhVD584F8JL20&amp;onload=captchaReady&amp;hl=zh-tw" async="" defer="defer"></script>
+</body>
+</html>
